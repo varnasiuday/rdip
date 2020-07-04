@@ -137,6 +137,57 @@ window.location.reload()
 return true;
 }
 }
+var button = document.getElementById('button-test');
+button.addEventListener('click', checkAnagram);
+var resultDiv = document.getElementById('result');
 
+function checkAnagram() {
+  var str1 = document.getElementById('string1').value;
+  var str2 = document.getElementById('string2').value;
+  if(str1 !== null && str2 !== null) {
+    if(str1.length !== str2.length) {
+      resultDiv.innerHTML = "Strings are not anagrams.";
+      return false;
+    }
+    var hashTable = {};
+    for(var i = 0; i < str1.length; i++) {
+      if(hashTable.hasOwnProperty(str1[i])) {
+        hashTable[str1[i]] = hashTable[str1[i]] + 1;
+    } else {
+     hashTable[str1[i]] = 1; 
+    }
+  }
+   
+  for(var i = 0; i < str2.length; i++) {
+    if(hashTable.hasOwnProperty(str2[i])) {
+      hashTable[str2[i]] = hashTable[str2[i]] - 1;
+    } else {
+      resultDiv.innerHTML = "Strings are not anagrams.";
+      return false;
+    }
+  }
+    
+  for(var i in hashTable) {
+    if(hashTable[i] !== 0) {
+      resultDiv.innerHTML = "Strings are not anagrams.";
+      return false;
+    } else {
+       resultDiv.innerHTML = "Strings are anagrams!";
+    }
+  }
+}
+}
+function checkPalindrome() {
+var revStr = "";
+var str = document.getElementById("str").value;
+var i = str.length;
+for(var j=i; j>=0; j--) {
+revStr = revStr+str.charAt(j);
+}
+if(str == revStr) {
+alert(str+" -is Palindrome");
+} else {
+alert(str+" -is not a Palindrome");
+}
 
 
